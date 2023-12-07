@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.antoniocostadossantos.todoapp.R
 import com.antoniocostadossantos.todoapp.databinding.FragmentTasksBinding
 import com.antoniocostadossantos.todoapp.model.Task
 import com.antoniocostadossantos.todoapp.ui.adapter.TasksAdapter
 import com.antoniocostadossantos.todoapp.ui.newtask.NewTaskBottomSheet
+import com.antoniocostadossantos.todoapp.ui.viewtask.ViewObservationTaskDialog
+import com.antoniocostadossantos.todoapp.util.CONCLUDED
+import com.antoniocostadossantos.todoapp.util.TASK_ENTITY
+import com.antoniocostadossantos.todoapp.util.UPDATE_TASK
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TasksFragment : Fragment() {
@@ -38,14 +43,14 @@ class TasksFragment : Fragment() {
     }
 
     private fun getBoolean() {
-        concludedTasks = arguments?.getBoolean("CONCLUDED") ?: false
+        concludedTasks = arguments?.getBoolean(CONCLUDED) ?: false
     }
 
     private fun setupTitle() {
         binding.title.text = if (concludedTasks) {
-            "Concluded"
+            getString(R.string.concluded)
         } else {
-            "Not Concluded"
+            getString(R.string.not_concluded)
         }
     }
 
@@ -70,21 +75,24 @@ class TasksFragment : Fragment() {
 
     private fun setupRecyclerView() {
         tasksAdapter = TasksAdapter(
-            checkTask = {
-                checkTask(it)
-            },
-            updateTask = {
-                updateTask(it)
-            },
-            deleteTask = {
-                deleteTask(it)
-            }
-
-
+            checkTask = { checkTask(it) },
+            clickTask = { clickTask(it) },
+            updateTask = { updateTask(it) },
+            deleteTask = { deleteTask(it) }
         )
         binding.rvTasks.apply {
             adapter = tasksAdapter
             setHasFixedSize(true)
+        }
+    }
+
+    private fun clickTask(task: Task) {
+        if (task.observation.isNotEmpty()) {
+            val observationTask = ViewObservationTaskDialog()
+            observationTask.arguments = Bundle().apply { putParcelable(TASK_ENTITY, task) }
+            observationTask.show(childFragmentManager, "")
+        } else {
+            Toast.makeText(requireContext(), R.string.no_observations, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -94,16 +102,12 @@ class TasksFragment : Fragment() {
 
     private fun observeFlow() {
         when (concludedTasks) {
-            true -> {
-                tasksViewModel.concludedTasks.observe(viewLifecycleOwner) {
-                    tasksAdapter.setItems(it)
-                }
+            true -> tasksViewModel.concludedTasks.observe(viewLifecycleOwner) {
+                tasksAdapter.setItems(it)
             }
 
-            false -> {
-                tasksViewModel.notConcludedTasks.observe(viewLifecycleOwner) {
-                    tasksAdapter.setItems(it)
-                }
+            false -> tasksViewModel.notConcludedTasks.observe(viewLifecycleOwner) {
+                tasksAdapter.setItems(it)
             }
         }
     }
@@ -112,11 +116,11 @@ class TasksFragment : Fragment() {
         val bottomSheet = NewTaskBottomSheet()
 
         bottomSheet.arguments = Bundle().apply {
-            putBoolean("UPDATE_TASK", true)
-            putParcelable("TASK_ENTITY", task)
+            putBoolean(UPDATE_TASK, true)
+            putParcelable(TASK_ENTITY, task)
         }
 
-        bottomSheet.show(activity?.supportFragmentManager!!, "")
+        bottomSheet.show(childFragmentManager, "")
     }
 
     private fun deleteTask(task: Task) {

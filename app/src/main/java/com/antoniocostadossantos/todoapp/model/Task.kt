@@ -11,5 +11,6 @@ import kotlinx.parcelize.Parcelize
 data class Task(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     @ColumnInfo(name = "title") var title: String = "",
+    @ColumnInfo(name = "observation") var observation: String = "",
     @ColumnInfo(name = "checked") var checked: Boolean = false,
 ) : Parcelable

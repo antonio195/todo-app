@@ -6,6 +6,7 @@ import com.antoniocostadossantos.todoapp.databinding.ActivityMainBinding
 import com.antoniocostadossantos.todoapp.ui.adapter.FragmentsAdapter
 import com.antoniocostadossantos.todoapp.ui.newtask.NewTaskBottomSheet
 import com.antoniocostadossantos.todoapp.ui.tasks.TasksFragment
+import com.antoniocostadossantos.todoapp.util.CONCLUDED
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             listOf(
                 TasksFragment(),
                 TasksFragment().apply {
-                    arguments = Bundle().apply { putBoolean("CONCLUDED", true) }
+                    arguments = Bundle().apply { putBoolean(CONCLUDED, true) }
                 })
         )
 
@@ -45,8 +46,8 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Not Concluded"
-                1 -> tab.text = "Concluded"
+                0 -> tab.text = getString(R.string.not_concluded)
+                1 -> tab.text = getString(R.string.concluded)
             }
         }.attach()
     }

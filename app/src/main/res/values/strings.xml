@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Tarefas</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="observations">Observations</string>
+    <string name="no_observations">No observations</string>
+    <string name="not_concluded">Not Concluded</string>
+    <string name="concluded">Concluded</string>
+    <string name="update_task">Update Task</string>
+    <string name="btn_save">Save</string>
+    <string name="title_new_task">New Task</string>
+    <string name="title_input">Title</string>
+    <string name="no_tasks_for_now">Sem tarefas por enquanto...</string>
 </resources>

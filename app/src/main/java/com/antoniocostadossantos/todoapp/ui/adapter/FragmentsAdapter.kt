@@ -1,6 +1,5 @@
 package com.antoniocostadossantos.todoapp.ui.adapter
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -15,7 +14,6 @@ class FragmentsAdapter(
     override fun getItemCount() = fragments.size
 
     override fun createFragment(position: Int): Fragment {
-        Log.i("TESTE", fragments.size.toString())
         return when (position) {
             0 -> fragments[0]
             1 -> fragments[1]

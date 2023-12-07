@@ -11,6 +11,7 @@ import com.antoniocostadossantos.todoapp.model.Task
 
 class TasksAdapter(
     val checkTask: (Task) -> Unit,
+    val clickTask: (Task) -> Unit,
     val updateTask: (Task) -> Unit,
     val deleteTask: (Task) -> Unit,
 ) : RecyclerView.Adapter<TasksAdapter.ToDoViewHolder>() {
@@ -33,6 +34,7 @@ class TasksAdapter(
         holder.bind(taskItems[position])
 
         holder.checked.setOnClickListener { checkTask(taskItems[position]) }
+        holder.itemView.setOnClickListener { clickTask(taskItems[position]) }
         holder.itemView.setOnLongClickListener {
 
             val popMenu = PopupMenu(holder.itemView.context, it)
