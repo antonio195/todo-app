@@ -50,10 +50,13 @@ class NewTaskBottomSheet : BottomSheetDialogFragment() {
 
     private fun saveTask() {
         binding.btnSaveNewTask.setOnClickListener {
-            task.title = binding.taskTitleInput.text.toString()
-            task.observation = binding.taskObservationsInput.text.toString()
-            newTaskViewModel.newTask(task)
-            dismiss()
+            if (binding.taskTitleInput.text.toString().isNotBlank()) {
+                task.title = binding.taskTitleInput.text.toString()
+                task.observation = binding.taskObservationsInput.text.toString()
+                newTaskViewModel.newTask(task)
+                dismiss()
+            }
+            binding.taskTitleLayout.error = getString(R.string.enter_a_title)
         }
     }
 }
