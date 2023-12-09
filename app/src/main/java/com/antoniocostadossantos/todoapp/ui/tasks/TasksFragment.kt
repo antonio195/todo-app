@@ -1,5 +1,7 @@
 package com.antoniocostadossantos.todoapp.ui.tasks
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +39,7 @@ class TasksFragment : Fragment() {
         getBoolean()
         setupIconTopBar()
         setupTitle()
+        setupInfoIcon()
         setupRecyclerView()
         getAllTasks()
         observeFlow()
@@ -51,6 +54,17 @@ class TasksFragment : Fragment() {
             getString(R.string.concluded)
         } else {
             getString(R.string.not_concluded)
+        }
+    }
+
+    private fun setupInfoIcon() {
+        binding.infoIcon.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.linkedin.com/in/antoniocostasantos/")
+                )
+            )
         }
     }
 
