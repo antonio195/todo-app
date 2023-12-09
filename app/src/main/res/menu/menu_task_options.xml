@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/update_task"
-        android:title="Update task" />
+        android:title="@string/update_task" />
 
     <item
         android:id="@+id/delete_task"
-        android:title="Delete task" />
+        android:title="@string/delete_task" />
 </menu>
