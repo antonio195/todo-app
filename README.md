@@ -5,7 +5,7 @@
 # Principais tecnologias usadas
 * Room
 * Coroutines
-* LiveData
+* Flow
 
 # Bugs ou sugestão?
 ### Envie um email para antonio195br@gmail.com.
