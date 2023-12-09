@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tarefas</string>
+    <string name="observations">Observações</string>
+    <string name="no_observations">Sem observações</string>
+    <string name="not_concluded">Não concluído</string>
+    <string name="concluded">Concluído</string>
+    <string name="update_task">Atualizar tarefa</string>
+    <string name="btn_save">Salvar</string>
+    <string name="title_new_task">Nova tarefa</string>
+    <string name="title_input">Título</string>
+    <string name="no_tasks_for_now">Sem tarefas por enquanto...</string>
+    <string name="enter_a_title">Insira um título</string>
+    <string name="task_title">Título da tarefa</string>
+    <string name="delete_task">Excluir tarefa</string>
+</resources>
